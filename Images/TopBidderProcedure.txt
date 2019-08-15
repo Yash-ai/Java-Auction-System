@@ -1,0 +1,21 @@
+delimiter $
+create procedure topBids(in ProdId varchar(40),in tbUsername varchar(40))
+     begin
+     declare tb1 varchar(40) default null;
+     declare tb2 varchar(40) default null;
+     declare tb3 varchar(40) default null;
+     declare continue handler for not found set finished=1;
+     select  TB1 into tb1 from topbidders where ProID=ProdId;
+      if finished=0 then
+        update topbidders set TB1=tbUsername where ProID=ProdId;
+        select TB2 into tb2 from topbidders where ProID=ProdId;
+        update topbidders set TB2=tb1 where ProID=ProdId;
+        select TB3 into tb1 from topbidders where ProID=ProdId;
+        update topbidders set TB3=tb2 where ProID=ProdId;
+        select TB4 into tb2 from topbidders where ProID=ProdId;
+        update topbidders set TB4=tb1 where ProID=ProdId;
+        select TB5 into tb3 from topbidders where ProID=ProdId;
+        update topbidders set TB5=tb2 where ProID=ProdId;
+      end if;
+    end $
+delimiter ;
